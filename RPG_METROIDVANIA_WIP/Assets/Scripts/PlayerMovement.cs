@@ -1,5 +1,6 @@
 using Mono.Cecil;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     private float groundCheckDistanceY;
     [SerializeField]
     private float groundCheckDistanceX;
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    private SpriteRenderer playerSprite;
+
+    public UnityEvent OnLandEvent;
 
     private void OnEnable()
     {
@@ -48,8 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-            Move();
-            Jump();
+        Move();
+        Jump();
+        CheckWasJumping();
     }
 
     private void Move()
@@ -57,6 +65,15 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection.x != 0)
         {
             body.linearVelocity = new Vector2(moveDirection.x * moveSpeed, body.linearVelocityY);
+            if (moveDirection.x < 0)
+            {
+                playerSprite.flipX = true;
+            }
+
+            else if (moveDirection.x > 0)
+            {
+                playerSprite.flipX = false;
+            }
             //Debug.Log("Player is moving");
         }
 
@@ -65,13 +82,26 @@ public class PlayerMovement : MonoBehaviour
             body.linearVelocity = new Vector2(0, body.linearVelocityY);
             //Debug.Log("Player is not moving");
         }
+
+        if (Grounded())
+        {
+            animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+        }
+
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }
     }
 
     private void Jump()
     {
-        if (Grounded() == true && moveDirection.y > 0)
+
+        if (Grounded() == true && moveDirection.y > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
         {
+            animator.SetBool("Jumping", false);
             body.linearVelocity = new Vector2(body.linearVelocityX, jumpSpeed);
+            animator.SetBool("Jumping", true);
             //Debug.Log("Player is jumping");
         }
     }
@@ -79,8 +109,8 @@ public class PlayerMovement : MonoBehaviour
     private bool Grounded()
     {
         if (Physics2D.Raycast(groundChecker.position, Vector2.down, groundCheckDistanceY, groundLayer)
-            || Physics2D.Raycast(groundChecker.position + new Vector3(groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceX, groundLayer)
-            || Physics2D.Raycast(groundChecker.position + new Vector3(-groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceX, groundLayer))
+            || Physics2D.Raycast(groundChecker.position + new Vector3(groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceY, groundLayer)
+            || Physics2D.Raycast(groundChecker.position + new Vector3(-groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceY, groundLayer))
         {
             return true;
         }
@@ -89,6 +119,19 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void CheckWasJumping()
+    {
+        if (Grounded() && Mathf.Abs(body.linearVelocity.y) < 0.1f)
+        {
+            OnLandEvent.Invoke();
+        }
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("Jumping", false);
     }
 
     //Here as a reference and a example of how to do the new Input Fire System
