@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
+    private LayerMask wallLayer;
+    [SerializeField]
     private float groundCheckDistanceY;
     [SerializeField]
     private float groundCheckDistanceX;
@@ -30,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private SpriteRenderer playerSprite;
-
     public UnityEvent OnLandEvent;
 
     private void OnEnable()

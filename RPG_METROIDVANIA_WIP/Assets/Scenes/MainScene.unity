@@ -2007,7 +2007,7 @@ GameObject:
   - component: {fileID: 467665435}
   - component: {fileID: 467665434}
   m_Layer: 3
-  m_Name: Tile (41)
+  m_Name: Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,7 +2038,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 03b8604f95c1099438bd904498d0ab38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2289,7 +2289,7 @@ Transform:
   m_GameObject: {fileID: 485064739}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.56, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 0.75, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4957,7 +4957,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6838764, y: 1.2118355}
+  m_Size: {x: 0.6838764, y: 1.19}
   m_EdgeRadius: 0
 --- !u!212 &1665406448
 SpriteRenderer:
@@ -5105,6 +5105,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   groundCheckDistanceY: 0.2
   groundCheckDistanceX: 0.5
   animator: {fileID: 1665406451}
@@ -5163,7 +5166,7 @@ GameObject:
   - component: {fileID: 1716221463}
   - component: {fileID: 1716221462}
   m_Layer: 3
-  m_Name: Tile (40)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5194,7 +5197,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 03b8604f95c1099438bd904498d0ab38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
