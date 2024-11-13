@@ -159,17 +159,4 @@ public class Card : MonoBehaviour, IUsable
             sprite = gameObject.transform.GetComponent<SpriteRenderer>().sprite;
         }
     }
-
-    /*public int Cost
-    {
-        get { return cost; }
-        set
-        {
-            // Example validation: Ensure cost can't be negative
-            if (value >= 0)
-                cost = value;
-            else
-                Debug.LogWarning("Cost must be non-negative.");
-        }
-    }*/
 }
