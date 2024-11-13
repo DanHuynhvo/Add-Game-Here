@@ -104,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Grounded() == false && body.linearVelocity.y <= 0 && isGrounded == false)
         {
-            Debug.Log("Falling");
             animator.SetBool("Falling", true);
         }
     }
