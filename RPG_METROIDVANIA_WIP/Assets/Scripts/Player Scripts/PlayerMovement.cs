@@ -6,33 +6,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D body;
-    [SerializeField]
-    private InputActionReference moveRef;
-    [SerializeField]
-    private InputActionReference fireRef;
-    [SerializeField]
-    private Vector2 moveDirection;
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
-    private float jumpSpeed;
-    [SerializeField]
-    private Transform groundChecker;
-    [SerializeField]
-    private LayerMask groundLayer;
-    [SerializeField]
-    private LayerMask wallLayer;
-    [SerializeField]
-    private float groundCheckDistanceY;
-    [SerializeField]
-    private float groundCheckDistanceX;
-    [SerializeField]
-    private Animator animator;
-    [SerializeField]
-    private SpriteRenderer playerSprite;
+    [Header("Player Components")]
+    [SerializeField] private Rigidbody2D body;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private Transform groundChecker;
+
+    [Header("Player Variables")]
+    [SerializeField] private Vector2 moveDirection;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float groundCheckDistanceY;
+    [SerializeField] private float groundCheckDistanceX;
+
+    [Header("Layers")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
+
+    [Header("Unity References")]
     public UnityEvent OnLandEvent;
+    [SerializeField] private InputActionReference moveRef;
+    [SerializeField] private InputActionReference fireRef;  //Currently unused, here as reference to Unity's input system
 
     private void OnEnable()
     {
