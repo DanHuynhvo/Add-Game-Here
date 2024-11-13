@@ -2,12 +2,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour, IUsable
+public class Card : MonoBehaviour
 {
     [Header("Card Components")]
     [SerializeField] private string cardName;   // string for name
     [SerializeField] private string description;    //short text for card flavor
     [SerializeField] private string type;   // tbd, possibly damage, utility or defence
+    [SerializeField] private string aoe;    // string determining what enemies it may target such as 'single' 'row' 'adjacent'
     [SerializeField] private int duration;  // number of turns a card effect should be 
     [SerializeField] private List<float> damage = new List<float>();  // damage card should do. List because certain cards might do different AOE damage
     [SerializeField] private List<ResourceCost> resourceCosts = new List<ResourceCost>();  // List to serialize the resource dictionary
@@ -25,13 +26,13 @@ public class Card : MonoBehaviour, IUsable
 
     // IUsable
 
-    public void Use()   //Use card effect
+    public void UseCard(List<GameObject> targets, Card card)   //Pass targets and card information to the card effect
     {
         effect = gameObject.transform.GetComponent<ICardEffectable>();  // This is an interface all variable card effects should have
 
         if (effect != null)
         {
-            effect.UseEffect();
+            effect.UseEffect(targets, card);
         }
     }
 
@@ -55,6 +56,13 @@ public class Card : MonoBehaviour, IUsable
     {
         get { return type; }
         set { type = value; }
+    }
+
+    // Getter and Setter for aoe
+    public string AOE
+    {
+        get { return aoe; }
+        set { aoe = value; }
     }
 
     // Getter and Setter for duration

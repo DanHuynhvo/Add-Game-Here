@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private Sprite fallingSprite;
     [SerializeField] private Transform groundChecker;
 
     [Header("Player Variables")]
     [SerializeField] private Vector2 moveDirection;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistanceY;
     [SerializeField] private float groundCheckDistanceX;
 
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
         }
 
-        else
+        else if(isGrounded)
         {
             animator.SetFloat("Speed", 0);
         }
@@ -99,6 +101,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Jumping", true);
             //Debug.Log("Player is jumping");
         }
+
+        if (Grounded() == false && body.linearVelocity.y <= 0 && isGrounded == false)
+        {
+            Debug.Log("Falling");
+            animator.SetBool("Falling", true);
+        }
     }
 
     private bool Grounded()
@@ -107,11 +115,13 @@ public class PlayerMovement : MonoBehaviour
             || Physics2D.Raycast(groundChecker.position + new Vector3(groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceY, groundLayer)
             || Physics2D.Raycast(groundChecker.position + new Vector3(-groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceY, groundLayer))
         {
+            isGrounded = true;
             return true;
         }
 
         else
         {
+            isGrounded = false;
             return false;
         }
     }
@@ -127,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("Jumping", false);
+        animator.SetBool("Falling", false);
     }
 
     //Here as a reference and a example of how to do the new Input Fire System
