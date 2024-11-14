@@ -80,6 +80,20 @@ public class Card : MonoBehaviour
         set { damage = value; }
     }
 
+    // Getter and Setter for sprite
+    public Sprite Sprite
+    {
+        get { return sprite; }
+        set { sprite = value; }
+    }
+
+    // Getter and Setter for effect
+    public ICardEffectable Effect
+    {
+        get { return effect; }
+        set { effect = value; }
+    }
+
     // Getter and Setter for resourceCosts (List<ResourceCost>)
     public List<ResourceCost> ResourceCosts
     {
@@ -100,20 +114,6 @@ public class Card : MonoBehaviour
                 resourceCostsDict[pair.Key] = pair.Value;
             }
         }
-    }
-
-    // Getter and Setter for sprite
-    public Sprite Sprite
-    {
-        get { return sprite; }
-        set { sprite = value; }
-    }
-
-    // Getter and Setter for effect
-    public ICardEffectable Effect
-    {
-        get { return effect; }
-        set { effect = value; }
     }
 
     // Method to retrieve the cost of a specific resource from resourceCostsDict
