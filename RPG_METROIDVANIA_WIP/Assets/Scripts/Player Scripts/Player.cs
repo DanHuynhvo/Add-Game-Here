@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.U2D;
+using UnityEngine.SceneManagement;
+using System.Xml.Linq;
 
 public class Player : MonoBehaviour, ICreature
 {
@@ -13,6 +15,9 @@ public class Player : MonoBehaviour, ICreature
     [SerializeField] private Dictionary<string, int> p_ResourceDict = new Dictionary<string, int>();
     [SerializeField] private Dictionary<string, int> p_Conditions = new Dictionary<string, int>();
     [SerializeField] private Sprite p_Sprite;
+    [SerializeField] private Collider2D p_Collider;
+    [SerializeField] private Rigidbody2D p_RigidBody;
+    [SerializeField] private PlayerMovement p_PlayerMovement;
 
     // Implementing the ICreature properties with 'p_' backing fields
     public int ID
@@ -62,6 +67,39 @@ public class Player : MonoBehaviour, ICreature
         get { return p_Sprite; }
         set { p_Sprite = value; }
     }
+    public Collider2D Collider
+    {
+        get { return p_Collider; }
+        set { p_Collider = value; }
+    }
+
+    public void takeDamage(float damage)
+    {
+        Health -= damage;
+    }
+
+    public void hasDied()
+    {
+        IsDead = false;
+    }
+
+    public void checkSceneCollider()
+    {
+        // Get the current scene
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Get the name of the current scene
+        string sceneName = currentScene.name;
+
+        // Output the scene name
+        if (currentScene.name == "BattleScene")
+        {
+            Debug.Log("In Battle");
+            p_Collider.enabled = false;
+            p_RigidBody.gravityScale = 0;
+            p_PlayerMovement.enabled = false;
+        }
+    }
 
     private void Awake()
     {
@@ -83,5 +121,40 @@ public class Player : MonoBehaviour, ICreature
         }
 
         this.ID = gameObject.GetInstanceID();
+    }
+
+    private void Start()
+    {
+        if (this.gameObject.GetComponent<Rigidbody2D>() != null)
+        {
+            p_RigidBody = this.gameObject.GetComponent<Rigidbody2D>();
+        }
+
+        else
+        {
+            Debug.Log(p_Name + " Does not have a rigid body " + "Instace ID is " + gameObject.GetInstanceID());
+        }
+
+        if (this.gameObject.GetComponent<Collider2D>() != null)
+        {
+            p_Collider = this.gameObject.GetComponent<Collider2D>();
+        }
+
+        else
+        {
+            Debug.Log(p_Name + " Does not have a collider " + "Instace ID is " + gameObject.GetInstanceID());
+        }
+
+        if (this.gameObject.GetComponent<PlayerMovement>() != null)
+        {
+            p_PlayerMovement = this.gameObject.GetComponent<PlayerMovement>();
+        }
+
+        else
+        {
+            Debug.Log(p_Name + " Does not have a movement script " + "Instace ID is " + gameObject.GetInstanceID());
+        }
+
+        checkSceneCollider();
     }
 }

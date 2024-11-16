@@ -9,7 +9,12 @@ public interface ICreature
     float Health { get; set; }
     bool IsDead { get; set; }
     Sprite Sprite { get; set; }
+    Collider2D Collider { get; set; }
     List<ResourceCost> Resources { get; set; }
     Dictionary<string, int> ResourceDict { get; set; }
     Dictionary<string, int> Conditions { get; set; }
+
+    void takeDamage(float damage);
+    void hasDied();
+    void checkSceneCollider();
 }

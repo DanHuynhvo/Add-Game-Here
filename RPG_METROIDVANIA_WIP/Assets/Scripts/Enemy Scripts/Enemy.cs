@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.U2D;
+using UnityEngine.SceneManagement;
+using System.Xml.Linq;
 
 public class Enemy : MonoBehaviour, ICreature
 {
@@ -13,6 +15,7 @@ public class Enemy : MonoBehaviour, ICreature
     [SerializeField] private Dictionary<string, int> e_ResourceDict = new Dictionary<string, int>();
     [SerializeField] private Dictionary<string, int> e_Conditions = new Dictionary<string, int>();
     [SerializeField] private Sprite e_Sprite;
+    [SerializeField] private Collider2D e_Collider;
 
     // Implementing the ICreature properties with 'e_' backing fields
     public int ID
@@ -63,10 +66,51 @@ public class Enemy : MonoBehaviour, ICreature
         set { e_Sprite = value; }
     }
 
+    public void takeDamage(float damage)
+    {
+        Health -= damage;
+    }
+
+    public void hasDied()
+    {
+        IsDead = false;
+    }
+
+    public Collider2D Collider
+    {
+        get { return e_Collider; }
+        set { e_Collider = value; }
+    }
+
+    public void checkSceneCollider()
+    {
+        // Get the current scene
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Get the name of the current scene
+        string sceneName = currentScene.name;
+
+        // Output the scene name
+        if (currentScene.name == "BattleScene")
+        {
+            e_Collider.GetComponent<Collider>().enabled = false;
+        }
+    }
+
     private void Awake()
     {
         // Clear the existing dictionary
         e_ResourceDict.Clear();
+
+        if (this.gameObject.GetComponent<Collider2D>() != null)
+        {
+            e_Collider = this.gameObject.GetComponent<Collider2D>();
+        }
+
+        else
+        {
+            Debug.Log(e_Name + " Does not have a collider " + "Instace ID is " + gameObject.GetInstanceID());
+        }
 
         // Populate the dictionary with the serialized data
         // Assuming you want to add resources to e_ResourceDict
@@ -83,5 +127,6 @@ public class Enemy : MonoBehaviour, ICreature
         }
 
         this.ID = gameObject.GetInstanceID();
+        checkSceneCollider();
     }
 }
