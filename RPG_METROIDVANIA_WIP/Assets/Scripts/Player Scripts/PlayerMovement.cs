@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 moveDirection;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float coyoteTime;
+    [SerializeField] private float coyoteTimer;
     [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistanceY;
     [SerializeField] private float groundCheckDistanceX;
@@ -94,12 +96,17 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
 
-        if (Grounded() == true && moveDirection.y > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
+        if (coyoteTimer > 0 && moveDirection.y > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
         {
             animator.SetBool("Jumping", false);
             body.linearVelocity = new Vector2(body.linearVelocityX, jumpSpeed);
             animator.SetBool("Jumping", true);
             //Debug.Log("Player is jumping");
+        }
+
+        else
+        {
+            coyoteTimer -=Time.deltaTime;
         }
 
         if (Grounded() == false && body.linearVelocity.y <= 0 && isGrounded == false)
@@ -115,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
             || Physics2D.Raycast(groundChecker.position + new Vector3(-groundCheckDistanceX, 0, 0), Vector2.down, groundCheckDistanceY, groundLayer))
         {
             isGrounded = true;
+            coyoteTimer = coyoteTime;
             return true;
         }
 
