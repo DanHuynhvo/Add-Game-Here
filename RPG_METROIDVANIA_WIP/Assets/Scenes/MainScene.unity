@@ -376,6 +376,10 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2659324942462878703, guid: ff0295926b8cc854485bf8e0ae25c767, type: 3}
+      propertyPath: jumpBuffer
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659324942462878703, guid: ff0295926b8cc854485bf8e0ae25c767, type: 3}
       propertyPath: fallingSprite
       value: 
       objectReference: {fileID: 7627258527157835838, guid: 89db2340b091cd144b5da1e16b62e451, type: 3}

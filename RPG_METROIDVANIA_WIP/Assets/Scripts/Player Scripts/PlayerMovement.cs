@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float coyoteTime;
     [SerializeField] private float coyoteTimer;
+    [SerializeField] private float jumpBuffer;
+    [SerializeField] private float jumpBufferTimer;
     [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistanceY;
     [SerializeField] private float groundCheckDistanceX;
@@ -96,7 +98,17 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
 
-        if (coyoteTimer > 0 && moveDirection.y > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
+        if (moveDirection.y > 0)
+        {
+            jumpBufferTimer = jumpBuffer;
+        }
+
+        else
+        {
+            jumpBufferTimer -= Time.deltaTime;
+        }
+
+        if (coyoteTimer > 0 && jumpBufferTimer > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
         {
             animator.SetBool("Jumping", false);
             body.linearVelocity = new Vector2(body.linearVelocityX, jumpSpeed);
