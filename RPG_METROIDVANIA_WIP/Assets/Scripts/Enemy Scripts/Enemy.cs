@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour, ICreature
 
         else
         {
-            Debug.Log(e_Name + " Does not have a collider " + "Instace ID is " + gameObject.GetInstanceID());
+            Debug.Log(e_Name + " Does not have a collider " + "Instance ID is " + gameObject.GetInstanceID());
         }
 
         // Populate the dictionary with the serialized data

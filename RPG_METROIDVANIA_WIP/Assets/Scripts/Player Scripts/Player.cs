@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, ICreature
     [SerializeField] private Collider2D p_Collider;
     [SerializeField] private Rigidbody2D p_RigidBody;
     [SerializeField] private PlayerMovement p_PlayerMovement;
+    [SerializeField] private Camera p_Camera;
 
     // Implementing the ICreature properties with 'p_' backing fields
     public int ID
@@ -98,6 +99,9 @@ public class Player : MonoBehaviour, ICreature
             p_Collider.enabled = false;
             p_RigidBody.gravityScale = 0;
             p_PlayerMovement.enabled = false;
+            p_Camera.transform.SetParent(null);
+            p_Camera.transform.position = new Vector3(0, 0, -10);
+            this.gameObject.transform.position = new Vector3(-5, 0, 0);
         }
     }
 
@@ -132,7 +136,7 @@ public class Player : MonoBehaviour, ICreature
 
         else
         {
-            Debug.Log(p_Name + " Does not have a rigid body " + "Instace ID is " + gameObject.GetInstanceID());
+            Debug.Log(p_Name + " Does not have a rigid body " + "Instance ID is " + gameObject.GetInstanceID());
         }
 
         if (this.gameObject.GetComponent<Collider2D>() != null)
@@ -142,7 +146,7 @@ public class Player : MonoBehaviour, ICreature
 
         else
         {
-            Debug.Log(p_Name + " Does not have a collider " + "Instace ID is " + gameObject.GetInstanceID());
+            Debug.Log(p_Name + " Does not have a collider " + "Instance ID is " + gameObject.GetInstanceID());
         }
 
         if (this.gameObject.GetComponent<PlayerMovement>() != null)
@@ -152,7 +156,17 @@ public class Player : MonoBehaviour, ICreature
 
         else
         {
-            Debug.Log(p_Name + " Does not have a movement script " + "Instace ID is " + gameObject.GetInstanceID());
+            Debug.Log(p_Name + " Does not have a movement script " + "Instance ID is " + gameObject.GetInstanceID());
+        }
+
+        if (this.gameObject.GetComponentInChildren<Camera>())
+        {
+            p_Camera = this.gameObject.GetComponentInChildren<Camera>();
+        }
+
+        else
+        {
+            Debug.Log(p_Name + " Does not have a camera " + "Instance ID is " + gameObject.GetInstanceID());
         }
 
         checkSceneCollider();

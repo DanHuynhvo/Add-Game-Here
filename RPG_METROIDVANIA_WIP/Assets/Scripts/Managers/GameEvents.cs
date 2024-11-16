@@ -7,6 +7,7 @@ public class GameEvents : MonoBehaviour
     public static GameEvents current;
 
     public Action onPlayerCast;
+    public Action onPlayerDisabledComponents;
 
     public void Awake()
     {
@@ -17,6 +18,14 @@ public class GameEvents : MonoBehaviour
         if (onPlayerCast != null)
         {
             onPlayerCast();
+        }
+    }
+
+    public void PlayerDisabledComponents()
+    {
+        if (onPlayerDisabledComponents != null)
+        {
+            onPlayerDisabledComponents();
         }
     }
 
