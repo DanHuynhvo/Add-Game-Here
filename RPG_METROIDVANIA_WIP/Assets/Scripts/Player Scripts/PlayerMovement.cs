@@ -1,4 +1,3 @@
-using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float coyoteTimer;
     [SerializeField] private float jumpBuffer;
     [SerializeField] private float jumpBufferTimer;
+    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float jumpCooldownTimer;
     [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistanceY;
     [SerializeField] private float groundCheckDistanceX;
@@ -101,11 +102,13 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection.y > 0)
         {
             jumpBufferTimer = jumpBuffer;
+            jumpCooldownTimer = jumpCooldown;
         }
 
         else
         {
             jumpBufferTimer -= Time.deltaTime;
+            jumpCooldownTimer -= Time.deltaTime;
         }
 
         if (coyoteTimer > 0 && jumpBufferTimer > 0 && !animator.GetBool("Jumping") && body.linearVelocity.y <= 0)
@@ -118,12 +121,18 @@ public class PlayerMovement : MonoBehaviour
 
         else
         {
-            coyoteTimer -=Time.deltaTime;
+            coyoteTimer -= Time.deltaTime;
         }
 
-        if (Grounded() == false && body.linearVelocity.y <= 0 && isGrounded == false)
+        if (Grounded() == false && body.linearVelocity.y <= 0)
         {
+            animator.SetBool("Jumping", false);
             animator.SetBool("Falling", true);
+        }
+
+        else
+        {
+            animator.SetBool("Falling", false);
         }
     }
 
@@ -160,8 +169,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Here as a reference and a example of how to do the new Input Fire System
-    /*private void Fire(InputAction.CallbackContext obj)
-    {
-        Debug.Log("Testing Fire Button!");
-    }*/
+    //private void Fire(InputAction.CallbackContext obj)
+    //{
+        //Debug.Log("Testing Fire Button!");
+    //}
 }
+
