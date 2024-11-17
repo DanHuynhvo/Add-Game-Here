@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, ICreature
     [SerializeField] private Rigidbody2D p_RigidBody;
     [SerializeField] private PlayerMovement p_PlayerMovement;
     [SerializeField] private Camera p_Camera;
+    [SerializeField] private Vector3 p_position;
 
     // Implementing the ICreature properties with 'p_' backing fields
     public int ID
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour, ICreature
             p_PlayerMovement.enabled = false;
             p_Camera.transform.SetParent(null);
             p_Camera.transform.position = new Vector3(0, 0, -10);
-            this.gameObject.transform.position = new Vector3(-5, 0, 0);
+            this.gameObject.transform.position = p_position;
         }
     }
 

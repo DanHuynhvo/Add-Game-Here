@@ -129,4 +129,17 @@ public class Enemy : MonoBehaviour, ICreature
         this.ID = gameObject.GetInstanceID();
         checkSceneCollider();
     }
+
+    private void Start()
+    {
+        if (this.gameObject.GetComponent<Collider2D>() != null)
+        {
+            e_Collider = this.gameObject.GetComponent<Collider2D>();
+        }
+
+        else
+        {
+            Debug.Log(e_Name + " Does not have a collider " + "Instance ID is " + gameObject.GetInstanceID());
+        }
+    }
 }
