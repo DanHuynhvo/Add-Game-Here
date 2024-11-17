@@ -11,11 +11,13 @@ public class Enemy : MonoBehaviour, ICreature
     [SerializeField] private string e_Name;
     [SerializeField] private float e_Health;
     [SerializeField] private bool e_IsDead;
+    [SerializeField] private bool e_IsTheirTurn;
     [SerializeField] private List<ResourceCost> e_Resources = new List<ResourceCost>();
     [SerializeField] private Dictionary<string, int> e_ResourceDict = new Dictionary<string, int>();
     [SerializeField] private Dictionary<string, int> e_Conditions = new Dictionary<string, int>();
     [SerializeField] private Sprite e_Sprite;
     [SerializeField] private Collider2D e_Collider;
+    [SerializeField] private Vector3 e_position;
 
     // Implementing the ICreature properties with 'e_' backing fields
     public int ID
@@ -40,6 +42,12 @@ public class Enemy : MonoBehaviour, ICreature
     {
         get { return e_IsDead; }
         set { e_IsDead = value; }
+    }
+
+    public bool IsTheirTurn
+    {
+        get { return e_IsTheirTurn; }
+        set { e_IsTheirTurn = value; }
     }
 
     public List<ResourceCost> Resources
@@ -82,6 +90,11 @@ public class Enemy : MonoBehaviour, ICreature
         set { e_Collider = value; }
     }
 
+    public GameObject Creature
+    {
+        get { return this.gameObject; }
+    }
+
     public void checkSceneCollider()
     {
         // Get the current scene
@@ -93,7 +106,7 @@ public class Enemy : MonoBehaviour, ICreature
         // Output the scene name
         if (currentScene.name == "BattleScene")
         {
-            e_Collider.GetComponent<Collider>().enabled = false;
+            transform.position = e_position;
         }
     }
 

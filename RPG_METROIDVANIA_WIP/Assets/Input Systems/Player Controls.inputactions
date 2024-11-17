@@ -6,22 +6,13 @@
             "id": "a637384d-b106-4db8-a9c6-93d2584542a0",
             "actions": [
                 {
-                    "name": "WASD",
-                    "type": "Value",
+                    "name": "Click",
+                    "type": "Button",
                     "id": "3ac6d84d-6c84-44b0-97a1-2270ee5e384a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "03ba179a-b619-47f7-8d4b-2237299b0b29",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD",
+                    "action": "Click",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "WASD",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +45,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "WASD",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,7 +56,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "WASD",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -76,18 +67,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "WASD",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "d0914756-27bc-415d-8d17-193abd4b6375",
-                    "path": "<Keyboard>/f",
+                    "id": "7bad1537-61d7-4d4f-b0f4-94def96cb07b",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Fire",
+                    "groups": ";Mouse",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -101,6 +92,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, ICreature
     [SerializeField] private string p_Name;
     [SerializeField] private float p_Health;
     [SerializeField] private bool p_IsDead;
+    [SerializeField] private bool p_IsTheirTurn;
     [SerializeField] private List<ResourceCost> p_Resources = new List<ResourceCost>();
     [SerializeField] private Dictionary<string, int> p_ResourceDict = new Dictionary<string, int>();
     [SerializeField] private Dictionary<string, int> p_Conditions = new Dictionary<string, int>();
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour, ICreature
     [SerializeField] private PlayerMovement p_PlayerMovement;
     [SerializeField] private Camera p_Camera;
     [SerializeField] private Vector3 p_position;
+    [SerializeField] private PlayerCards p_Cards;
 
     // Implementing the ICreature properties with 'p_' backing fields
     public int ID
@@ -44,6 +46,12 @@ public class Player : MonoBehaviour, ICreature
     {
         get { return p_IsDead; }
         set { p_IsDead = value; }
+    }
+
+    public bool IsTheirTurn
+    {
+        get { return p_IsTheirTurn; }
+        set { p_IsTheirTurn = value; }
     }
 
     public List<ResourceCost> Resources
@@ -73,6 +81,11 @@ public class Player : MonoBehaviour, ICreature
     {
         get { return p_Collider; }
         set { p_Collider = value; }
+    }
+
+    public GameObject Creature
+    {
+        get { return this.gameObject; }
     }
 
     public void takeDamage(float damage)
