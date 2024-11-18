@@ -11,6 +11,7 @@ public class GameEvents : MonoBehaviour
     public Action onCardChosen;
     public Action onBattleStart;
     public Action onFilledDeck;
+    public Action onFilledHand;
 
     public void Awake()
     {
@@ -53,6 +54,14 @@ public class GameEvents : MonoBehaviour
         if (onFilledDeck != null)
         {
             onFilledDeck();
+        }
+    }
+
+    public void FilledHand()
+    {
+        if (onFilledHand != null)
+        {
+            onFilledHand();
         }
     }
 

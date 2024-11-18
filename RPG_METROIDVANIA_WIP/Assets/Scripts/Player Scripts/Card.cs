@@ -166,4 +166,19 @@ public class Card : MonoBehaviour
             sprite = gameObject.transform.GetComponent<SpriteRenderer>().sprite;
         }
     }
+
+    public void SetCard(Card otherCard)
+    {
+        // Copying all the values from the otherCard
+        this.cardName = otherCard.cardName;
+        this.description = otherCard.description;
+        this.type = otherCard.type;
+        this.aoe = otherCard.aoe;
+        this.duration = otherCard.duration;
+        this.damage = new List<float>(otherCard.damage);  // Deep copy the damage list
+        this.resourceCosts = new List<ResourceCost>(otherCard.resourceCosts);  // Deep copy the resourceCosts list
+        this.resourceCostsDict = new Dictionary<string, int>(otherCard.resourceCostsDict);  // Deep copy the dictionary
+        this.sprite = otherCard.sprite;
+        this.effect = otherCard.effect;
+    }
 }

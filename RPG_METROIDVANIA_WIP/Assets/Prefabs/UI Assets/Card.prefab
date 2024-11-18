@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4629575990374531209}
   - component: {fileID: 7184280580674903771}
   - component: {fileID: 8478070363940260327}
+  - component: {fileID: 9090578115102729968}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -75,3 +76,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9090578115102729968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377838011907346325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8b3eef0e1cb1f44baca3fe59e677f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: 
+  description: 
+  type: 
+  aoe: 
+  duration: 0
+  damage: []
+  resourceCosts: []
+  sprite: {fileID: 0}
