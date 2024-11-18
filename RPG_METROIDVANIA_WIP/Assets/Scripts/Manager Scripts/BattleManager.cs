@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour  // This script should handle turn or
     private void Start()
     {
         battleCam = Camera.main;
-        if (turnOrder[0] != null && turnOrder[0].GetComponent<Player>())
+        if (turnOrder[0] != null && turnOrder[0].GetComponent<Player>())    // Check to see if player is first in turn order. Player should always be first
         {
             playerCards = turnOrder[0].GetComponent<PlayerCards>();
         }

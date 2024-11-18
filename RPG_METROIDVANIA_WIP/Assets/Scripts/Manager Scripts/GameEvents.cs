@@ -8,6 +8,7 @@ public class GameEvents : MonoBehaviour
 
     public Action onPlayerCast;
     public Action onPlayerDisabledComponents;
+    public Action onCardChosen;
 
     public void Awake()
     {
@@ -26,6 +27,14 @@ public class GameEvents : MonoBehaviour
         if (onPlayerDisabledComponents != null)
         {
             onPlayerDisabledComponents();
+        }
+    }
+
+    public void CardChosen()
+    {
+        if (onCardChosen != null)
+        {
+            onCardChosen();
         }
     }
 
