@@ -9,6 +9,8 @@ public class GameEvents : MonoBehaviour
     public Action onPlayerCast;
     public Action onPlayerDisabledComponents;
     public Action onCardChosen;
+    public Action onBattleStart;
+    public Action onFilledDeck;
 
     public void Awake()
     {
@@ -35,6 +37,22 @@ public class GameEvents : MonoBehaviour
         if (onCardChosen != null)
         {
             onCardChosen();
+        }
+    }
+
+    public void BattleStart()
+    {
+        if (onBattleStart != null)
+        {
+            onBattleStart();
+        }
+    }
+
+    public void FilledDeck()
+    {
+        if (onFilledDeck != null)
+        {
+            onFilledDeck();
         }
     }
 

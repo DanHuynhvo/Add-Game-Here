@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour  // This script should handle turn or
     private void OnEnable()
     {
         clickRef.action.started += Click;
+        
     }
 
     private void OnDisable()
@@ -21,13 +22,17 @@ public class BattleManager : MonoBehaviour  // This script should handle turn or
         clickRef.action.started -= Click;
     }
 
-    private void Start()
+    private void Start()    // Initialize the players -> enemies -> player cards -> card UI
     {
+
+
         battleCam = Camera.main;
         if (turnOrder[0] != null && turnOrder[0].GetComponent<Player>())    // Check to see if player is first in turn order. Player should always be first
         {
             playerCards = turnOrder[0].GetComponent<PlayerCards>();
         }
+
+        GameEvents.current.BattleStart();
     }
 
     void SelectEnemy()
