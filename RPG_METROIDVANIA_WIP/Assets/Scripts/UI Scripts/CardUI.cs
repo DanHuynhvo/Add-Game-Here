@@ -33,6 +33,7 @@ public class CardUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 GameObject card = Instantiate(ui_Card, gameObject.transform.position, Quaternion.identity, this.gameObject.transform);
                 card.GetComponent<Card>().SetCard(cards.playerHand[i]);
+                card.GetComponent<Image>().sprite = card.GetComponent<Card>().Sprite;
             }
         }
     }
