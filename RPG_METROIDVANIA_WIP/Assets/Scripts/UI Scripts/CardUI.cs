@@ -27,11 +27,13 @@ public class CardUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void SetUpInitCards()
     {
+
+
         if (cards.playerHand.Count > 0)
         {
             for (int i = 0; i < cards.playerHand.Count; i++)
             {
-                GameObject card = Instantiate(ui_Card, gameObject.transform.position, Quaternion.identity, this.gameObject.transform);
+                GameObject card = Instantiate(ui_Card, gameObject.transform.position, Quaternion.identity, this.gameObject.transform);  // UI Card is a generic UI object, not a direct card
                 card.GetComponent<Card>().SetCard(cards.playerHand[i]);
                 card.GetComponent<Image>().sprite = card.GetComponent<Card>().Sprite;
             }
